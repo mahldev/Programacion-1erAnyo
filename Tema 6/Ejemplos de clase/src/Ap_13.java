@@ -10,12 +10,12 @@ public class Ap_13 {
         System.out.println("Introduzca a continuacion la senticia: ");
         sentenciaUsuario = sc.nextLine();
 
-        if (tieneComentarios(sentenciaUsuario)) {
+        while (tieneComentarios(sentenciaUsuario)) {
 
             sentenciaUsuario = eliminaComentarios(sentenciaUsuario);
             System.out.println("Se han eliminado los comentarios");
-        }
 
+        }
         muestraSentencia(sentenciaUsuario);
     }
 
@@ -37,8 +37,6 @@ public class Ap_13 {
 
     private static boolean tieneComentarios(String sentenciaUsuario) {
 
-        int posicion = sentenciaUsuario.indexOf("/*");
-
-        return posicion != -1;
+        return sentenciaUsuario.contains("/*");
     }
 }
