@@ -13,7 +13,6 @@ public class Ap_13 {
         while (tieneComentarios(sentenciaUsuario)) {
 
             sentenciaUsuario = eliminaComentarios(sentenciaUsuario);
-            System.out.println("Se han eliminado los comentarios");
 
         }
         muestraSentencia(sentenciaUsuario);
