@@ -7,7 +7,6 @@ public class Ap_17 {
         Scanner sc = new Scanner(System.in);
 
         int longitudSecuencia;
-        String[] secuencia;
         String palabra;
 
         System.out.print("Introduzca la longitud de la secuencia: ");
@@ -15,38 +14,10 @@ public class Ap_17 {
         System.out.print("Introduzca la palabra: ");
         palabra = sc.next();
 
-        secuencia = dividePalabra(palabra, longitudSecuencia);
-        muestraSecuencia(secuencia);
-    }
+        for (int contador = 0; contador < palabra.length(); i += longitudSecuencia) {
 
-    private static void muestraSecuencia(String[] secuencia) {
-
-        for (int indice = 0; indice < secuencia.length; indice++) {
-
-            System.out.println(secuencia[indice]);
+            int fin = Math.min(contador + longitudSecuencia, palabra.length());
+            System.out.println(palabra.substring(contador, fin));
         }
-    }
-
-    private static String[] dividePalabra(String palabra, int longitud) {
-
-        double numeroDeSecuencia = (double) palabra.length() / (double) longitud;
-        double decimales = numeroDeSecuencia - ((int) numeroDeSecuencia);
-
-        numeroDeSecuencia += decimales;
-
-        String[] secuencias = new String[(int) numeroDeSecuencia];
-        int inicio = 0;
-        for (int indice = 0; indice < secuencias.length; indice++) {
-
-            if (indice == secuencias.length - 1) {
-
-                secuencias[indice] = palabra.substring(inicio);
-            } else {
-
-                secuencias[indice] = palabra.substring(inicio, inicio + longitud);
-                inicio += longitud;
-            }
-        }
-        return secuencias;
     }
 }
