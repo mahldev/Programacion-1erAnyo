@@ -14,6 +14,5 @@ public class Pruebas {
         System.out.println(persona1.edad);
         persona1.cumplirAnyos();
         System.out.println(persona1.edad);
-
     }
 }
