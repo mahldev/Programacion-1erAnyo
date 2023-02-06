@@ -4,9 +4,8 @@ public class prueba {
 
         CuentaCorriente cuenta1 = new CuentaCorriente("46199353N", "Roberto", 1000);
 
-        cuenta1.mostrarInformacion();
         cuenta1.sacarDinero(1000);
-        cuenta1.mostrarInformacion();
+        System.out.println(cuenta1);
 
     }
 }

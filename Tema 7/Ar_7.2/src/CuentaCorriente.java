@@ -4,7 +4,19 @@ class CuentaCorriente {
     String nombreTitular;
     double saldo;
 
-    public CuentaCorriente() {
+    public CuentaCorriente(String dni, String nombreTitular) {
+
+        dni = dni.strip();
+        nombreTitular = nombreTitular.strip();
+        this.dni = dni;
+        this.nombreTitular = nombreTitular;
+    }
+
+    public CuentaCorriente(String dni, double saldo) {
+
+        dni = dni.strip();
+        this.dni = dni;
+        this.saldo = saldo;
     }
 
     public CuentaCorriente(String dni, String nombreTitular, double saldo) {
