@@ -13,7 +13,5 @@ public class App {
         texto.agregaPrincipio("wiwi ");
         System.out.println(texto);
         sc.close();
-
     }
-
 }
