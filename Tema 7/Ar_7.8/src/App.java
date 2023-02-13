@@ -6,7 +6,8 @@ public class App {
         
 
         radio.upFrequency();
-
-        
+        radio.showDisplay();
+        radio.downFrequency();
+        radio.showDisplay();
     }
 }
