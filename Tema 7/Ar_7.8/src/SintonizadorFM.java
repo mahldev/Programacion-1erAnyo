@@ -28,6 +28,8 @@ public class SintonizadorFM {
         if (frequency < 108) {
 
             this.frequency += 0.5;
+
+            frequency += 0.5;
         } else {
 
             this.frequency = 80;
@@ -39,6 +41,7 @@ public class SintonizadorFM {
         if (frequency > 80) {
 
             this.frequency -= 0.5;
+            frequency -= 0.5;
         } else {
 
             this.frequency = 108;
