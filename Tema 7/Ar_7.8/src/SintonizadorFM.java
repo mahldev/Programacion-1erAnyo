@@ -1,13 +1,13 @@
 public class SintonizadorFM {
 
-    private int frequency;
+    private double frequency;
 
     public SintonizadorFM() {
 
         this.frequency = 80;
     }
 
-    public SintonizadorFM(int frequency) {
+    public SintonizadorFM(double frequency) {
 
         if (frequency > 80 && frequency < 108) {
 
@@ -15,11 +15,11 @@ public class SintonizadorFM {
         }
     }
 
-    public void setFrequency(int frequency) {
+    public void setFrequency(double frequency) {
         this.frequency = frequency;
     }
 
-    public int getFrequency() {
+    public double getFrequency() {
         return frequency;
     }
 
@@ -27,7 +27,7 @@ public class SintonizadorFM {
 
         if (frequency < 108) {
 
-            frequency++;
+            frequency += 0.5;
         } else {
 
             frequency = 80;
@@ -38,7 +38,7 @@ public class SintonizadorFM {
 
         if (frequency > 80) {
 
-            frequency--;
+            frequency -= 0.5;
         } else {
 
             frequency = 108;
