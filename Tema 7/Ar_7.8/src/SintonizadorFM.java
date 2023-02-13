@@ -20,17 +20,17 @@ public class SintonizadorFM {
     }
 
     public double getFrequency() {
-        return frequency;
+        return this.frequency;
     }
 
     public void upFrequency() {
 
         if (frequency < 108) {
 
-            frequency += 0.5;
+            this.frequency += 0.5;
         } else {
 
-            frequency = 80;
+            this.frequency = 80;
         }
     }
 
@@ -38,15 +38,15 @@ public class SintonizadorFM {
 
         if (frequency > 80) {
 
-            frequency -= 0.5;
+            this.frequency -= 0.5;
         } else {
 
-            frequency = 108;
+            this.frequency = 108;
         }
     }
 
     public void showDisplay() {
 
-        System.out.println("Frequency: " + frequency + " MHz");
+        System.out.println("Frequency: " + this.frequency + " MHz");
     }
 }
