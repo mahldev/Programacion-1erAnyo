@@ -25,13 +25,17 @@ public class Cambio {
 
         int[] billetes = { 500, 200, 100, 50, 20, 10, 5 };
         int[] billetesHaDevolver = new int[0];
+        int index = 0;
 
-        for (int index = 0; index < billetes.length; index++) {
+        while (index < billetes.length && this.cambio > 0) {
 
             if (this.cambio >= billetes[index]) {
 
                 this.cambio -= billetes[index];
                 billetesHaDevolver = agregarBilletes(billetesHaDevolver, billetes[index]);
+            } else {
+
+                index++;
             }
         }
         return billetesHaDevolver;
@@ -41,14 +45,17 @@ public class Cambio {
 
         double[] monedas = { 2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01 };
         double[] monedasHaDevolver = new double[0];
+        int index = 0;
 
-        for (int index = 0; index < monedas.length; index++) {
+        while (index < monedas.length && this.cambio > 0) {
 
             if (this.cambio >= monedas[index]) {
 
-                
                 this.cambio -= monedas[index];
                 monedasHaDevolver = agregarMonedas(monedasHaDevolver, monedas[index]);
+            } else {
+
+                index++;
             }
         }
         return monedasHaDevolver;
