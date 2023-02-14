@@ -16,7 +16,7 @@ public class Colores {
 
         for (int index = 0; index < array.length; index++) {
 
-            if (array[index].equals(color)) {
+            if (array[index] != null && array[index].equals(color)) {
 
                 return false;
             }
@@ -24,25 +24,22 @@ public class Colores {
         return true;
     }
 
-    public void agregaColor(String color) {
+    public boolean agregaColor(String color) {
 
         if (noSeEncuentra(this.colores, color)) {
 
-            String[] nuevosColores = new String[this.colores.length + 1];
+            Arrays.copyOf(this.colores, this.colores.length + 1);
+            colores[this.colores.length - 1] = color;
 
-            System.arraycopy(this.colores, 0, nuevosColores, 0, this.colores.length);
-            nuevosColores[this.colores.length] = color;
-
-            colores = nuevosColores;
-            nuevosColores = null;
+            return true;
         }
+        return false;
     }
 
     public String[] devuelveColores(int cantidad) {
 
         String[] res = new String[cantidad];
 
-        eliminaNulls(cantidad, res);
 
         if (cantidad > colores.length) {
 
@@ -64,15 +61,6 @@ public class Colores {
         }
     }
 
-    private void eliminaNulls(int cantidad, String[] res) {
-        int aux = 0;
-        while (aux < cantidad) {
-
-            res[aux] = "";
-            aux++;
-        }
-    }
-
     private int indexAleatorio(int minimo, int maximo) {
 
         return (int) (Math.random() * (maximo - minimo) + minimo);
@@ -82,5 +70,4 @@ public class Colores {
     public String toString() {
         return "Colores [colores=" + Arrays.toString(colores) + "]";
     }
-
 }

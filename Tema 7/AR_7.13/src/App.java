@@ -12,7 +12,7 @@ public class App {
         colores.agregaColor("verde");
         System.out.println(colores);
 
-        String[] coloresAleatorios = colores.devuelveColores(6);
+        String[] coloresAleatorios = colores.devuelveColores(5);
 
         System.out.println(Arrays.toString(coloresAleatorios));
     }

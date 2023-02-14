@@ -10,6 +10,5 @@ public class App {
 
         System.out.println(Arrays.toString(billetes));
         System.out.println(Arrays.toString(monedas));
-
     }
 }

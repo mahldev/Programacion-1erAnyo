@@ -3,7 +3,6 @@ public class EcuacionSegundoGrado {
     private double a;
     private double b;
     private double c;
-    private double discriminante;
 
     public EcuacionSegundoGrado() {
     }
@@ -12,7 +11,6 @@ public class EcuacionSegundoGrado {
         this.a = a;
         this.b = b;
         this.c = c;
-        this.discriminante = b * b - 4 * a * c;
     }
 
     public double getA() {
@@ -41,6 +39,9 @@ public class EcuacionSegundoGrado {
     }
 
     private double[] discimanteMayor() {
+
+        double discriminante = daDiscriminante();
+
         double[] res = {
                 (-b + Math.sqrt(discriminante)) / (2 * a),
                 (-b - Math.sqrt(discriminante)) / (2 * a)
@@ -56,6 +57,7 @@ public class EcuacionSegundoGrado {
     public double[] daSoluciones() {
 
         double res[] = {};
+        double discriminante = daDiscriminante();
 
         if (discriminante > 0.0) {
 
@@ -69,10 +71,11 @@ public class EcuacionSegundoGrado {
 
     public boolean esPositivo() {
 
-        if (discriminante > 0) {
-            return true;
-        }
-        return false;
+        return (daDiscriminante() > 0);
+    }
 
+    private double daDiscriminante() {
+
+        return b * b - 4 * a * c;
     }
 }
