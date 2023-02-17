@@ -48,32 +48,62 @@ public class Conjunto {
         Conjunto nuevOtroConjunto = otroConjunto;
         comparaYElimina(nuevOtroConjunto);
 
-        if (longitudOtroConjunto < numeroElementos) {
+        if (otroConjunto.numeroElementos < numeroElementos) {
 
-            for (int i = 0; i < datos.length; i++) {
-                
-                for (int j = 0; j < otroConjunto.datos.length; j++) {
-                    
-                    if () {
-                        
-                    }
-                }
+            for (int index = 0; index < otroConjunto.numeroElementos; index++) {
+                this.datos[this.numeroElementos + 1] = otroConjunto.datos[index];
             }
+            return true;
         }
+        return false;
     }
 
     private void comparaYElimina(Conjunto otroConjunto) {
 
 
-        for (int i = 0; i < numeroElementos; i++) {
+        for (int indexThisConjunto = 0; indexThisConjunto < numeroElementos; indexThisConjunto++) {
 
-            for (int j = 0; j < otroConjunto.numeroElementos; j++) {
+            for (int indexOtroConjunto = 0; indexOtroConjunto < otroConjunto.numeroElementos; indexOtroConjunto++) {
 
-                if (datos[i] == otroConjunto.datos[j]) {
+                if (datos[indexThisConjunto] == otroConjunto.datos[indexOtroConjunto]) {
 
-                    eliminarElemento();
+                    eliminarElemento(otroConjunto,otroConjunto.datos[indexOtroConjunto]);
                 }
             }
         }
+    }
+
+    private boolean eliminarElemento(Conjunto conjunto ,Integer elemento) {
+
+        if (pertenece(elemento)) {
+            
+            for (int index = 0; index < conjunto.numeroElementos; index++) {
+                
+                if (conjunto.datos[index] == elemento) {
+
+                    conjunto.datos[index] = datos[conjunto.numeroElementos - 1];
+                    conjunto.numeroElementos--;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean eliminarElemento(Integer elemento) {
+
+        if (pertenece(elemento)) {
+            
+            for (int index = 0; index < numeroElementos; index++) {
+                
+                if (datos[index] == elemento) {
+
+                    datos[index] = datos[numeroElementos - 1];
+                    numeroElementos--;
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

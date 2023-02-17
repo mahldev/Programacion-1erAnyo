@@ -1,10 +1,12 @@
 public class App {
     
-    /** 
-     * @param args
-     * @throws Exception
-     */
-    public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+    public static void main(String[] args) {
+        
+        Conjunto conjunto1 = new Conjunto();
+        
+        conjunto1.insertar(1);
+
+        System.out.println(conjunto1.eliminarElemento(1));
     }
+
 }
