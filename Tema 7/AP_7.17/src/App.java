@@ -2,7 +2,10 @@ public class App {
 
     public static void main(String[] args) {
 
-        System.out.println(Codigo.codifica("Zzzz",1));
-        
+        String cadena = "HOLA esto Es UsA  + CODIFICACION";
+        cadena = Codigo.codificaCesar(cadena, 1);
+        System.out.println(cadena);
+
+        System.out.println(Codigo.descodificaCesar(cadena, 1));
     }
 }
