@@ -1,8 +1,6 @@
-import java.util.Arrays;
-
 public class Conjunto {
 
-    public Integer[] datos;
+    private Integer[] datos;
     private int numeroElementos;
 
     public Conjunto() {
@@ -50,109 +48,61 @@ public class Conjunto {
 
     public boolean insertar(Conjunto otroConjunto) {
 
-        Conjunto nuevoOtroConjunto = otroConjunto;
-        comparaYElimina(nuevoOtroConjunto);
-        muestraArray(nuevoOtroConjunto);
-        System.out.println();
+        boolean res = false;
 
-        if (nuevoOtroConjunto.numeroElementos < this.numeroElementos - this.datos.length
-                && nuevoOtroConjunto.numeroElementos > 0) {
-            System.out.println("hol");
-            int index = 0;
-            while (index < nuevoOtroConjunto.numeroElementos) {
+        if (otroConjunto.numeroElementos - repetidos(otroConjunto) < this.datos.length - this.numeroElementos) {
 
-                this.datos[this.numeroElementos + 1] = nuevoOtroConjunto.datos[index++];
-                this.numeroElementos++;
-            }
-            return true;
-        }
-        return false;
-    }
+            for (int index = 0; index < otroConjunto.numeroElementos; index++) {
 
-<<<<<<< HEAD
-    private void comparaYElimina(Conjunto OtroConjunto) {
-=======
-    private void comparaYElimina(Conjunto otroConjunto) {
->>>>>>> 155a30eaeaffd54363b9a21876485f254f524bcf
-
-        for (int indexThisConjunto = 0; indexThisConjunto < numeroElementos; indexThisConjunto++) {
-
-            for (int indexOtroConjunto = 0; indexOtroConjunto < OtroConjunto.numeroElementos; indexOtroConjunto++) {
-
-                if (datos[indexThisConjunto] == OtroConjunto.datos[indexOtroConjunto]) {
-
-<<<<<<< HEAD
-                    eliminarElemento(OtroConjunto, indexOtroConjunto);
-=======
-                    eliminarElemento(otroConjunto, otroConjunto.datos[indexOtroConjunto]);
->>>>>>> 155a30eaeaffd54363b9a21876485f254f524bcf
+                if (!pertenece(otroConjunto.datos[index])) {
+                    insertar(otroConjunto.datos[index]);
+                    res = true;
                 }
             }
         }
-    }
-
-<<<<<<< HEAD
-    private void eliminarElemento(Conjunto conjunto, int indiceAEliminar) {
-
-        System.arraycopy(conjunto.datos, indiceAEliminar + 1, conjunto.datos, indiceAEliminar,
-                (indiceAEliminar + 1) - conjunto.datos.length);
-=======
-    private boolean eliminarElemento(Conjunto conjunto, Integer elemento) {
-
-        if (pertenece(elemento)) {
-
-            for (int index = 0; index < conjunto.numeroElementos; index++) {
-
-                if (conjunto.datos[index] == elemento) {
-
-                    conjunto.datos[index] = datos[conjunto.numeroElementos - 1];
-                    conjunto.numeroElementos--;
-                    return true;
-                }
-            }
-        }
-        return false;
->>>>>>> 155a30eaeaffd54363b9a21876485f254f524bcf
+        return res;
     }
 
     public boolean eliminarElemento(Integer elemento) {
 
-        if (pertenece(elemento)) {
+        for (int index = 0; index < this.numeroElementos; index++) {
 
-            for (int index = 0; index < numeroElementos; index++) {
+            if (this.datos[index] == elemento) {
 
-                if (datos[index] == elemento) {
-
-                    datos[index] = datos[numeroElementos - 1];
-                    numeroElementos--;
-                    return true;
-                }
+                System.arraycopy(this.datos, index + 1, this.datos, index, this.numeroElementos - (index + 1));
+                numeroElementos--;
+                return true;
             }
         }
         return false;
     }
 
-<<<<<<< HEAD
-    public boolean elimanarConjunto(Conjunto otroConjunto) {
+    public boolean eliminarConjunto(Conjunto otroConjunto) {
 
-        for (int index = 0; index < otroConjunto.numeroElementos; index++) {
+        boolean res = false;
 
-            for (int indexThisConjunto = 0; indexThisConjunto < numeroElementos; indexThisConjunto++) {
+        for (int indexC1 = 0; indexC1 < this.numeroElementos; indexC1++) {
 
-                if (otroConjunto.datos[index] == this.datos[indexThisConjunto]) {
+            for (int indexC2 = 0; indexC2 < otroConjunto.numeroElementos; indexC2++) {
 
-                    eliminarElemento(this.datos[indexThisConjunto]);
-                    return true;
+                if (this.datos[indexC1] == otroConjunto.datos[indexC2]) {
+
+                    eliminarElemento(this.datos[indexC1]);
+                    res = true;
                 }
             }
         }
-        return false;
+        return res;
     }
 
-    public static void muestraArray(Conjunto conjunto) {
-        System.out.println(Arrays.toString(conjunto.datos));
+    public void muestra() {
+
+        for (int index = 0; index < this.numeroElementos; index++) {
+
+            System.out.println(this.datos[index]);
+        }
     }
-=======
+
     public static boolean incluido(Conjunto conjunto1, Conjunto conjunto2) {
 
         boolean res = false;
@@ -181,12 +131,32 @@ public class Conjunto {
         Conjunto nuevConjunto = new Conjunto(
                 conjunto1.numeroElementos + conjunto2.numeroElementos);
 
-        for (int index = 0; index < nuevConjunto.datos.length - 1; index++) {
+        for (int index = 0; index < conjunto1.numeroElementos; index++) {
 
             nuevConjunto.datos[nuevConjunto.numeroElementos++] = conjunto1.datos[index];
+        }
+        for (int index = 0; index < conjunto2.numeroElementos; index++) {
+
             nuevConjunto.datos[nuevConjunto.numeroElementos++] = conjunto2.datos[index];
         }
         return nuevConjunto;
+    }
+
+    private int repetidos(Conjunto otroConjunto) {
+
+        int repetidos = 0;
+
+        for (int indexC1 = 0; indexC1 < this.numeroElementos; indexC1++) {
+
+            for (int indexC2 = 0; indexC2 < otroConjunto.numeroElementos; indexC2++) {
+
+                if (this.datos[indexC1] == otroConjunto.datos[indexC2]) {
+
+                    repetidos++;
+                }
+            }
+        }
+        return repetidos;
     }
 
     private static int repetidos(Conjunto conjunto1, Conjunto conjunto2) {
@@ -206,5 +176,54 @@ public class Conjunto {
         return repetidos;
     }
 
->>>>>>> 155a30eaeaffd54363b9a21876485f254f524bcf
+    public static Conjunto interseccion(Conjunto conjunto1, Conjunto conjunto2) {
+
+        Conjunto nuevConjunto = new Conjunto(repetidos(conjunto1, conjunto2));
+
+        for (int indexC1 = 0; indexC1 < conjunto1.numeroElementos; indexC1++) {
+
+            for (int indexC2 = 0; indexC2 < conjunto2.numeroElementos; indexC2++) {
+
+                if (conjunto1.datos[indexC1] == conjunto2.datos[indexC2]) {
+
+                    if (conjunto1.datos[indexC1] == conjunto2.datos[indexC2]) {
+
+                        nuevConjunto.datos[nuevConjunto.numeroElementos++] = conjunto1.datos[indexC1];
+                    }
+                }
+            }
+        }
+        return nuevConjunto;
+    }
+
+    public static Conjunto diferencia(Conjunto conjunto1, Conjunto conjunto2) {
+
+        Conjunto nuevConjunto = new Conjunto(conjunto1.numeroElementos - (repetidos(conjunto1, conjunto2)));
+        Conjunto conjuntoRepeditos = Conjunto.interseccion(conjunto1, conjunto2);
+
+        if (!incluido(conjunto1, conjunto2)) {
+
+            for (int index = 0; index < conjunto1.numeroElementos; index++) {
+
+                if (!pertenece(conjunto1.datos[index], conjuntoRepeditos)) {
+
+                    nuevConjunto.datos[nuevConjunto.numeroElementos++] = conjunto1.datos[index];
+                }
+            }
+
+        }
+        return nuevConjunto;
+    }
+
+    private static boolean pertenece(Integer elemento, Conjunto conjunto) {
+
+        for (int index = 0; index < conjunto.numeroElementos; index++) {
+
+            if (conjunto.datos[index] == elemento) {
+
+                return true;
+            }
+        }
+        return false;
+    }
 }
