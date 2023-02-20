@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 public class Conjunto {
 
-    private Integer[] datos;
+    public Integer[] datos;
     private int numeroElementos;
 
     public Conjunto() {
@@ -69,7 +69,11 @@ public class Conjunto {
         return false;
     }
 
+<<<<<<< HEAD
     private void comparaYElimina(Conjunto OtroConjunto) {
+=======
+    private void comparaYElimina(Conjunto otroConjunto) {
+>>>>>>> 155a30eaeaffd54363b9a21876485f254f524bcf
 
         for (int indexThisConjunto = 0; indexThisConjunto < numeroElementos; indexThisConjunto++) {
 
@@ -77,16 +81,38 @@ public class Conjunto {
 
                 if (datos[indexThisConjunto] == OtroConjunto.datos[indexOtroConjunto]) {
 
+<<<<<<< HEAD
                     eliminarElemento(OtroConjunto, indexOtroConjunto);
+=======
+                    eliminarElemento(otroConjunto, otroConjunto.datos[indexOtroConjunto]);
+>>>>>>> 155a30eaeaffd54363b9a21876485f254f524bcf
                 }
             }
         }
     }
 
+<<<<<<< HEAD
     private void eliminarElemento(Conjunto conjunto, int indiceAEliminar) {
 
         System.arraycopy(conjunto.datos, indiceAEliminar + 1, conjunto.datos, indiceAEliminar,
                 (indiceAEliminar + 1) - conjunto.datos.length);
+=======
+    private boolean eliminarElemento(Conjunto conjunto, Integer elemento) {
+
+        if (pertenece(elemento)) {
+
+            for (int index = 0; index < conjunto.numeroElementos; index++) {
+
+                if (conjunto.datos[index] == elemento) {
+
+                    conjunto.datos[index] = datos[conjunto.numeroElementos - 1];
+                    conjunto.numeroElementos--;
+                    return true;
+                }
+            }
+        }
+        return false;
+>>>>>>> 155a30eaeaffd54363b9a21876485f254f524bcf
     }
 
     public boolean eliminarElemento(Integer elemento) {
@@ -106,6 +132,7 @@ public class Conjunto {
         return false;
     }
 
+<<<<<<< HEAD
     public boolean elimanarConjunto(Conjunto otroConjunto) {
 
         for (int index = 0; index < otroConjunto.numeroElementos; index++) {
@@ -125,4 +152,59 @@ public class Conjunto {
     public static void muestraArray(Conjunto conjunto) {
         System.out.println(Arrays.toString(conjunto.datos));
     }
+=======
+    public static boolean incluido(Conjunto conjunto1, Conjunto conjunto2) {
+
+        boolean res = false;
+
+        for (int indexC1 = 0; indexC1 < conjunto1.numeroElementos; indexC1++) {
+
+            res = false;
+
+            for (int indexC2 = 0; indexC2 < conjunto2.numeroElementos; indexC2++) {
+
+                if (conjunto1.datos[indexC1] == conjunto2.datos[indexC2]) {
+
+                    res = true;
+                }
+            }
+            if (!res) {
+
+                return false;
+            }
+        }
+        return res;
+    }
+
+    public static Conjunto union(Conjunto conjunto1, Conjunto conjunto2) {
+
+        Conjunto nuevConjunto = new Conjunto(
+                conjunto1.numeroElementos + conjunto2.numeroElementos);
+
+        for (int index = 0; index < nuevConjunto.datos.length - 1; index++) {
+
+            nuevConjunto.datos[nuevConjunto.numeroElementos++] = conjunto1.datos[index];
+            nuevConjunto.datos[nuevConjunto.numeroElementos++] = conjunto2.datos[index];
+        }
+        return nuevConjunto;
+    }
+
+    private static int repetidos(Conjunto conjunto1, Conjunto conjunto2) {
+
+        int repetidos = 0;
+
+        for (int indexC1 = 0; indexC1 < conjunto1.numeroElementos; indexC1++) {
+
+            for (int indexC2 = 0; indexC2 < conjunto2.numeroElementos; indexC2++) {
+
+                if (conjunto1.datos[indexC1] == conjunto2.datos[indexC2]) {
+
+                    repetidos++;
+                }
+            }
+        }
+        return repetidos;
+    }
+
+>>>>>>> 155a30eaeaffd54363b9a21876485f254f524bcf
 }
