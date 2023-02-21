@@ -9,9 +9,12 @@ public class Conjunto {
         this.numeroElementos = 0;
     }
 
-    public Conjunto(int numeroElementos) {
+    public Conjunto(int capacidad) {
 
-        datos = new Integer[numeroElementos];
+        if (capacidad < 10) {
+            capacidad = 10;
+        }
+        datos = new Integer[capacidad];
         this.numeroElementos = 0;
     }
 
@@ -33,31 +36,23 @@ public class Conjunto {
 
     public boolean insertar(Integer nuevo) {
 
-        boolean res = false;
+        boolean insertado = false;
 
-        if (!pertenece(nuevo)) {
-
-            if (this.numeroElementos < datos.length) {
-                datos[this.numeroElementos] = nuevo;
-                res = true;
-                this.numeroElementos++;
-            }
+        if (!pertenece(nuevo) && this.numeroElementos < datos.length) {
+            datos[this.numeroElementos++] = nuevo;
+            insertado = true;
         }
-        return res;
+        return insertado;
     }
 
     public boolean insertar(Conjunto otroConjunto) {
 
         boolean res = false;
 
-        if (otroConjunto.numeroElementos - repetidos(otroConjunto) < this.datos.length - this.numeroElementos) {
-
+        if (otroConjunto.numeroElementos - repetidos(otroConjunto) <= this.datos.length - this.numeroElementos) {
             for (int index = 0; index < otroConjunto.numeroElementos; index++) {
-
-                if (!pertenece(otroConjunto.datos[index])) {
-                    insertar(otroConjunto.datos[index]);
-                    res = true;
-                }
+                this.insertar(otroConjunto.datos[index]);
+                res = true;
             }
         }
         return res;
@@ -66,11 +61,21 @@ public class Conjunto {
     public boolean eliminarElemento(Integer elemento) {
 
         for (int index = 0; index < this.numeroElementos; index++) {
-
             if (this.datos[index] == elemento) {
-
                 System.arraycopy(this.datos, index + 1, this.datos, index, this.numeroElementos - (index + 1));
-                numeroElementos--;
+                this.numeroElementos--;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean eliminarElementoSinArrayCopy(Integer elemento) {
+
+        for (int index = 0; index < this.numeroElementos; index++) {
+            if (this.datos[index] == elemento) {
+                System.arraycopy(this.datos, index + 1, this.datos, index, this.numeroElementos - (index + 1));
+                this.numeroElementos--;
                 return true;
             }
         }
@@ -81,15 +86,10 @@ public class Conjunto {
 
         boolean res = false;
 
-        for (int indexC1 = 0; indexC1 < this.numeroElementos; indexC1++) {
+        for (int index = 0; index < otroConjunto.numeroElementos; index++) {
 
-            for (int indexC2 = 0; indexC2 < otroConjunto.numeroElementos; indexC2++) {
-
-                if (this.datos[indexC1] == otroConjunto.datos[indexC2]) {
-
-                    eliminarElemento(this.datos[indexC1]);
-                    res = true;
-                }
+            if (eliminarElemento(this.datos[index])) {
+                res = true;
             }
         }
         return res;
@@ -128,8 +128,7 @@ public class Conjunto {
 
     public static Conjunto union(Conjunto conjunto1, Conjunto conjunto2) {
 
-        Conjunto nuevConjunto = new Conjunto(
-                conjunto1.numeroElementos + conjunto2.numeroElementos);
+        Conjunto nuevConjunto = new Conjunto(conjunto1.numeroElementos + conjunto2.numeroElementos);
 
         for (int index = 0; index < conjunto1.numeroElementos; index++) {
 
@@ -207,10 +206,9 @@ public class Conjunto {
 
                 if (!pertenece(conjunto1.datos[index], conjuntoRepeditos)) {
 
-                    nuevConjunto.datos[nuevConjunto.numeroElementos++] = conjunto1.datos[index];
+                    nuevConjunto.insertar(conjunto1.datos[index]);
                 }
             }
-
         }
         return nuevConjunto;
     }
