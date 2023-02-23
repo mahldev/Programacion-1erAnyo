@@ -15,4 +15,8 @@ public class Persona {
         System.out.println("Edad: " + this.edad);
         System.out.println("Estatura: " + this.estatura);
     }
+
+    public boolean instanceOf(Class<Empleado> class1) {
+        return false;
+    }
 }
