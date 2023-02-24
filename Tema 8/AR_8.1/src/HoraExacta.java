@@ -24,7 +24,7 @@ public class HoraExacta extends Hora {
             segundos++;
         }
     }
-
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -33,7 +33,6 @@ public class HoraExacta extends Hora {
             return false;
         if (getClass() != obj.getClass())
             return false;
-
         HoraExacta other = (HoraExacta) obj;
         if ((this.segundos != other.segundos) &&
                 (this.getMinuto() != other.getMinuto()) &&
