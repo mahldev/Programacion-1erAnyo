@@ -26,19 +26,16 @@ public class Terminal {
 
     private String formatea(String numero1) {
         String res = "";
-        if (numero1.length() > 9) {
-
-            char[] caracteres = numero1.toCharArray();
-            for (int index = 0; index < caracteres.length; index++) {
-                if (index == 2) {
-                    res += String.valueOf(caracteres[index]) + " ";
-                } else if (index == 5) {
-                    res += String.valueOf(caracteres[index]) + " ";
-                } else if (index == 9) {
-                    res += String.valueOf(caracteres[index]) + " ";
-                } else {
-                    res += String.valueOf(caracteres[index]);
-                }
+        char[] caracteres = numero1.toCharArray();
+        for (int index = 0; index < caracteres.length; index++) {
+            if (index == 2) {
+                res += String.valueOf(caracteres[index]) + " ";
+            } else if (index == 5) {
+                res += String.valueOf(caracteres[index]) + " ";
+            } else if (index == 9) {
+                res += String.valueOf(caracteres[index]) + " ";
+            } else {
+                res += String.valueOf(caracteres[index]);
             }
         }
         return res;
