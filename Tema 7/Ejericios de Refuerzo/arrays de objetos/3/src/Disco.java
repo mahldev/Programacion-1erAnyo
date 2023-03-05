@@ -1,5 +1,5 @@
 public class Disco {
-  
+
   private String codigo = "LIBRE";
   private String autor;
   private String titulo;
@@ -7,7 +7,7 @@ public class Disco {
   private int duracion;
 
   public Disco() {
-  } 
+  }
 
   public Disco(String autor, String titulo, String genero, int duracion) {
     this.autor = autor;
@@ -46,7 +46,7 @@ public class Disco {
     this.duracion = duracion;
   }
 
-  public String getDuracion() {
+  public int getDuracion() {
     return this.duracion;
   }
 
@@ -60,3 +60,4 @@ public class Disco {
     cadena += "\n------------------------------------------";
     return cadena;
   }
+}
