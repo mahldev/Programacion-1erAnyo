@@ -24,7 +24,7 @@ public class HoraExacta extends Hora {
             segundos++;
         }
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

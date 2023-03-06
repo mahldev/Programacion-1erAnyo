@@ -22,7 +22,7 @@ public class Hora {
             minuto++;
         }
     }
-
+    
     public boolean setMinuto(int minuto) {
 
         if (minuto < 0 || minuto > 59) {
@@ -30,6 +30,11 @@ public class Hora {
         }
         this.minuto = minuto;
         return true;
+    }
+    
+    public static void diHola() {
+      
+      System.out.println("Hola");
     }
 
     public boolean setHora(int hora) {
