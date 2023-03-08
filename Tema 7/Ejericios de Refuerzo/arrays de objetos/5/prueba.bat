@@ -1,1 +1,0 @@
-.\GESTIMAL.bat

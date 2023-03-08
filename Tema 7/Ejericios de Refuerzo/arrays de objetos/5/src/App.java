@@ -126,8 +126,8 @@ public class App {
         if (indexArticulo != -1) {
             salir = false;
             while (!salir) {
-                System.out.println("\nModificando el articulo " + inventario[indexArticulo].getCodigoArticulo()
-                        + "\n----------------------");
+                System.out.print("\nModificando el articulo " + inventario[indexArticulo].getCodigoArticulo());
+                System.out.println(inventario[indexArticulo]);
                 System.out.println("Que desea cambiar");
                 for (int index = 0; index < preguntas.length; index++) {
                     System.out.println((index + 1) + ". " + preguntas[index]);
