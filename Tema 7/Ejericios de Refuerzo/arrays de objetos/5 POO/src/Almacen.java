@@ -26,7 +26,7 @@ public class Almacen {
         int indexToDelete = pertenece(articulo);
 
         if (indexToDelete != -1) {
-            for (int index = indexToDelete; index < almacen.length - 1; index++) {
+            for (int index = indexToDelete; index < numArticulos - 1; index++) {
                 almacen[index] = almacen[index + 1];
             }
             numArticulos--;
