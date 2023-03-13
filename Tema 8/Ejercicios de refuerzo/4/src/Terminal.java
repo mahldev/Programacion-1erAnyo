@@ -4,6 +4,7 @@ public class Terminal {
     private int tiempoConversacion;
 
     public Terminal(String numero) {
+
         String numeroString = String.valueOf(numero);
         numeroString = numeroString.replaceAll(" ", "");
         if (numeroString.length() == 9) {
@@ -12,11 +13,13 @@ public class Terminal {
     }
 
     public void llama(Terminal terminal, int tiempo) {
+
         this.tiempoConversacion += tiempo;
         terminal.tiempoConversacion += tiempo;
     }
 
     private String formatea(String numero1) {
+
         String res = "";
         char[] caracteres = numero1.toCharArray();
         for (int index = 0; index < caracteres.length; index++) {
@@ -35,6 +38,7 @@ public class Terminal {
 
     @Override
     public String toString() {
+
         String tmp = formatea(this.numero);
         return "Nº " + tmp + " - " + this.tiempoConversacion + "s de conversacion";
     }

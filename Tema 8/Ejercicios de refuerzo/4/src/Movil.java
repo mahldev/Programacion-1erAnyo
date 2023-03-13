@@ -7,6 +7,7 @@ public class Movil extends Terminal {
     private double coste;
 
     public Movil(String numero, String nombre) {
+
         super(numero);
         Tarifa tarifa = new Tarifa(nombre);
         this.tarifa = tarifa;
@@ -14,6 +15,7 @@ public class Movil extends Terminal {
 
     @Override
     public void llama(Terminal movil, int tiempoConversacion) {
+
         final double DE_SEGUNDOS_A_MINUTOS = 60.00;
         super.llama(movil, tiempoConversacion);
         this.coste += (tiempoConversacion / DE_SEGUNDOS_A_MINUTOS) * tarifa.getCostePorMinuto();
@@ -21,7 +23,6 @@ public class Movil extends Terminal {
 
     @Override
     public String toString() {
-        String superString = super.toString();
-        return superString + "- tarificados " + df.format(this.coste) + " euros";
+        return super.toString() + "- tarificados " + df.format(this.coste) + " euros";
     }
 }

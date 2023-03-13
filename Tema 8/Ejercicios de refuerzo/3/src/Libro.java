@@ -1,4 +1,4 @@
-public class Libro extends Publicacion {
+public class Libro extends Publicacion implements Prestable {
 
     private boolean prestado;
 
@@ -7,33 +7,37 @@ public class Libro extends Publicacion {
         this.prestado = false;
     }
 
-    public void presta() {
-        if (!this.prestado) {
-            this.prestado = true;
-        } else {
-            System.out.println("Lo siento, ese libro ya está prestado.");
-        }
-    }
-
-    public boolean estaPrestado() {
-        return this.prestado;
-    }
-
-    public void devuelve() {
-        if (this.prestado) {
-            this.prestado = false;
-        } else {
-            System.out.println("El libro, no está prestado.");
-        }
-    }
-
     @Override
     public String toString() {
+
         String aux = super.toString();
         String prestadoString = " (prestado)";
         if (!prestado) {
             prestadoString = " (no prestado)";
         }
         return aux + prestadoString;
+    }
+
+    @Override
+    public boolean presta() {
+
+        if (estaPrestado())
+            return false;
+        this.prestado = true;
+        return true;
+    }
+
+    @Override
+    public boolean devuelve() {
+
+        if (!estaPrestado())
+            return false;
+        this.prestado = false;
+        return true;
+    }
+
+    @Override
+    public boolean estaPrestado() {
+        return this.prestado;
     }
 }
