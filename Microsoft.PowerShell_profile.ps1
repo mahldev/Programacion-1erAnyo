@@ -13,12 +13,19 @@ Import-Module -Name Terminal-Icons
 
 # auto-completion
 Import-Module PSReadLine
+Set-PSReadLineOption -EditMode Emacs
+Set-PSReadLineOption -BellStyle None 
 Set-PSReadLineOption -PredictionSource History
 Set-PSReadLineOption -PredictionViewStyle ListView
 
+## scoop install fzf
+## Install-Module -Name PSFzf -Force 
+Import-Module PSFzf
+Set-PSFzfOption -PSReadlineChordProvider 'Ctrl+f' -PSReadLineChordReverseHistory 'Ctrl+r'
+
 #Fuctions
-function whereis ($command) {
-	Get-Command -Name $command -ErrorAction SilentlyContinue
+function which ($command) {
+	Get-Command -Name $command -ErrorAction SilentlyContinue |
 	Select-Object -ExpandProperty Path -ErrorAction SilentlyContinue
 }
 
