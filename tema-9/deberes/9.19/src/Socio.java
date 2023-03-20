@@ -6,16 +6,18 @@ public class Socio implements Comparable<Socio> {
     }
     private int id;
     private String nombre;
+    private int edad;
 
     public Socio() {
 
         this.id = contadorIds++;
     }
 
-    public Socio(int id, String nombre) {
+    public Socio(int id, String nombre, int edad) {
 
         this.id = id;
         this.nombre = nombre;
+        this.edad = edad;
     }
 
     @Override
@@ -25,9 +27,6 @@ public class Socio implements Comparable<Socio> {
 
     @Override
     public int compareTo(Socio other) {
-        if (this.nombre.compareTo(other.nombre) == 0) {
-            return this.id - other.id;
-        }
-        return -this.nombre.compareTo(other.nombre);
+        return -this.edad - other.edad;
     }
 }

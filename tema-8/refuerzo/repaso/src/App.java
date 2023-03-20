@@ -75,15 +75,15 @@ public class App {
 
         String[] options = {
 
-                "1 - Insertar",
-                "2 - Listar",
-                "3 - Editar",
-                "4 - Borrar",
-                "5 - Sair"
+                "Insertar",
+                "Listar",
+                "Editar",
+                "Borrar",
+                "Sair"
         };
 
         for (int index = 0; index < options.length; index++) {
-            System.out.println(options[index]);
+            System.out.println((index + 1) + ". " + options[index]);
         }
         System.out.print("-> ");
         return sc.nextInt();
