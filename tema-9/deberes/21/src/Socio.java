@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Socio implements Comparable<Socio> {
 
     private static int contadorIds;
@@ -7,6 +9,7 @@ public class Socio implements Comparable<Socio> {
     private int id;
     private String nombre;
     private int edad;
+    private LocalDate fechaNacimiento;
 
     public Socio() {
 
@@ -18,15 +21,18 @@ public class Socio implements Comparable<Socio> {
         this.id = id;
         this.nombre = nombre;
         this.edad = edad;
+        this.fechaNacimiento = LocalDate.now();
     }
 
     @Override
     public String toString() {
-        return "\n id: " + id + " nombre: " + nombre;
+        return "\n id: " + id + " | nombre: " + nombre + " | edad: " + edad;
     }
 
     @Override
     public int compareTo(Socio other) {
-        return -this.edad - other.edad;
+        if (this.edad - other.edad == 0)
+            return this.id - other.id;
+        return this.edad - other.edad;
     }
 }
