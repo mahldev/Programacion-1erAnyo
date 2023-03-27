@@ -81,7 +81,7 @@ public class Llamada implements Comparable<Llamada> {
     }
 
     public double calcularCoste() {
-        return (duracionLLamadaEnSegundos() / (60)) * tarifa.getCoste();
+        return (duracionLLamadaEnSegundos() / 60) * tarifa.getCoste();
     }
 
     public int duracionLLamadaEnSegundos() {
@@ -99,6 +99,21 @@ public class Llamada implements Comparable<Llamada> {
             res += " - Duracion: " + this.duracionLLamadaEnSegundos()
                     + " Segundos - Coste: " + this.calcularCoste();
         }
+        return res;
+    }
+
+    @Override
+    public int compareTo(Llamada o) {
+        String numero1 = this.numero;
+        String numero2 = o.numero;
+        int res;
+        if (!this.saliente)
+            numero1 = this.numeroInterlocutor;
+        if (!o.saliente)
+            numero2 = o.numeroInterlocutor;
+        res = numero1.compareTo(numero2);
+        if (res == 0)
+            res = fechaYHoraInicio.compareTo(o.fechaYHoraInicio);
         return res;
     }
 }
