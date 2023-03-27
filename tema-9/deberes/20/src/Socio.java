@@ -22,11 +22,13 @@ public class Socio implements Comparable<Socio> {
 
     @Override
     public String toString() {
-        return "\n id: " + id + " nombre: " + nombre + " edad: " + edad;
+        return "\n id: " + id + " | nombre: " + nombre + " | edad: " + edad;
     }
 
     @Override
     public int compareTo(Socio other) {
+        if (this.edad - other.edad == 0)
+            return this.id - other.id;
         return this.edad - other.edad;
     }
 }
