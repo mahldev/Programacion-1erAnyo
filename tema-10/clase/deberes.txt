@@ -1,0 +1,12 @@
+int perdirEntero(String msj)
+
+long pedirLong()
+
+float 
+
+double
+
+char
+
+string
+

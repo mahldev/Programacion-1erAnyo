@@ -1,9 +1,7 @@
 public interface Empleado {
 
-    int horasTrabajadasMes = 0;
+    int HORAS_TRABAJADAS_MES = 100;
 
-    public int getHorasTrabajadasMes();
-
-    public void setHorasTrabajadasMes(int horas);
+    public void incrementarHoras(int horas);
 
 }

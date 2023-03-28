@@ -1,10 +1,7 @@
 
 public interface Cliente {
 
-    int saldoCuenta = 0;
+    double SALDO_CUENTA = 3000;
 
-    public int getSalgoCuenta();
-
-    public void setSaldoCuenta(int saldoCuenta);
-
+    public void incrementarSaldo(double saldo);
 }

@@ -1,19 +1,23 @@
 public class Persona implements Empleado, Cliente {
 
-    private String dni;
+    private final String DNI;
     private String nombre;
     private boolean esCliente;
     private boolean esEmpleado;
+    private double saldo;
+    private int horasTrabajadasAlMes;
 
     public Persona(String dni, String nombre, boolean esCliente, boolean esEmpleado) {
-        this.dni = dni;
+        this.DNI = dni;
         this.nombre = nombre;
         this.esCliente = esCliente;
         this.esEmpleado = esEmpleado;
+        this.saldo = Persona.SALDO_CUENTA;
+        this.horasTrabajadasAlMes = Persona.HORAS_TRABAJADAS_MES;
     }
 
     public String getDni() {
-        return dni;
+        return DNI;
     }
 
     public String getNombre() {
@@ -40,33 +44,40 @@ public class Persona implements Empleado, Cliente {
         this.esEmpleado = esEmpleado;
     }
 
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
+    public int getHorasTrabajadasAlMes() {
+        return horasTrabajadasAlMes;
+    }
+
+    public void setHorasTrabajadasAlMes(int horasTrabajadasAlMes) {
+        this.horasTrabajadasAlMes = horasTrabajadasAlMes;
+    }
+
+    @Override
+    public void incrementarSaldo(double saldo) {
+        this.saldo += saldo;
+    }
+
+    @Override
+    public void incrementarHoras(int horasTrabajadasAlMes) {
+        this.horasTrabajadasAlMes += horasTrabajadasAlMes;
+    }
+
     @Override
     public String toString() {
         String res = "\ndni: " + dni + " - nombre: " + nombre;
         if (esCliente)
-            res += " - Es Cliente";
+            res += " - Es Cliente - Saldo: " + this.saldo;
         if (esEmpleado)
-            res += " - Es Empleado";
+            res += " - Es Empleado - Horas trabajadas al mes: " + this.horasTrabajadasAlMes;
         return res;
     }
 
-    @Override
-    public int getSalgoCuenta() {
-        return saldoCuenta;
-    }
-
-    @Override
-    public void setSaldoCuenta(int saldo) {
-        this.saldoCuenta = saldo;
-    }
-
-    @Override
-    public int getHorasTrabajadasMes() {
-        return this.horasTrabajadasMes;
-    }
-
-    @Override
-    public void setHorasTrabajadasMes(int horasTrabajadasMes) {
-        this.horasTrabajadasMes = horasTrabajadasMes;
-    }
 }
