@@ -74,7 +74,7 @@ public class EntradaTeclado {
         char character = 0;
 
         System.out.print(msj);
-        character = sc.nextLine().charAt(0);
+        character = (sc.nextLine() + " ").charAt(0);
 
         return character;
     }
