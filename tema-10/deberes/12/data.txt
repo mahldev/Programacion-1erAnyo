@@ -1,9 +1,0 @@
-[
-  {
-     "nombre" : "Roberto",
-     "edad" : 12
-  }
-],{
-     "nombre" : "Manuel",
-     "edad" : 21
-  }
