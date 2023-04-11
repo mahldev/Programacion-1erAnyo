@@ -19,6 +19,8 @@ public class App {
             try (
                     BufferedReader in = new BufferedReader(new FileReader(fileName + ".txt"))) {
                 do {
+            
+                
                     error = false;
                     nextLine = in.readLine();
                     if (nextLine != null) {
