@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.security.interfaces.ECKey;
 import java.util.Scanner;
 
 public class App {
@@ -28,10 +27,9 @@ public class App {
             } catch (FileNotFoundException e) {
                 error = true;
                 fileName = "prueba";
-            } 
-
+            }
         } while (error);
-        System.out.println(consoleText);
+        System.out.println("El Texto del fichero es: " + consoleText);
         sc.close();
     }
 }
