@@ -29,6 +29,7 @@ public class App {
         for (String string : textSplit) {
             if (string.equals(" "))
                 numberOfWords--;
+
         }
 
         System.out.println(

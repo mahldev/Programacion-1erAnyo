@@ -12,10 +12,8 @@ public class App {
 
         if (diff[0].length() == 0)
             return "+________________\n   -" + diff[1];
-        sc = new Scanner(diff[0]);
-        sc1 = new Scanner(diff[1]);
-        sc.useDelimiter(" ");
-        sc1.useDelimiter(" ");
+        sc = new Scanner(diff[0]).useDelimiter(" ");
+        sc1 = new Scanner(diff[1]).useDelimiter(" ");
         try {
             while (sc.hasNext() && isEqual) {
                 isEqual = (word = sc.next()).equals(word1 = sc1.next());
@@ -25,10 +23,8 @@ public class App {
         }
         sc.close();
         sc1.close();
-        sc = new Scanner(word);
-        sc1 = new Scanner(word1);
-        sc.useDelimiter("");
-        sc1.useDelimiter("");
+        sc = new Scanner(word).useDelimiter("");
+        sc1 = new Scanner(word1).useDelimiter("");
         try {
             while (sc.hasNext()) {
                 if (!(res = sc.next()).equals(aux = sc1.next())) {
@@ -38,11 +34,12 @@ public class App {
                 }
             }
         } catch (Exception e) {
-            return "+" + res;
+            return "+" + res + "\n   -";
         }
+        aux = sc1.next();
         sc.close();
         sc1.close();
-        return res;
+        return "+ \n   -" + aux;
     }
 
     public static void main(String[] args) throws Exception {
@@ -68,6 +65,8 @@ public class App {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-        System.out.println(isEqual ? "Los archivos son iguales" : lineNumber + ": " + showDiff(diff));
+        System.out.println(isEqual
+                ? "Los archivos son iguales"
+                : lineNumber + ": " + showDiff(diff));
     }
 }
