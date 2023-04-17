@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<estacion>
+    <registros>
+        <registro id="1">
+            <fecha/>
+            <temperatura_maxima>1</temperatura_maxima>
+            <temperatura_minima>2</temperatura_minima>
+        </registro>
+    </registros>
+</estacion>

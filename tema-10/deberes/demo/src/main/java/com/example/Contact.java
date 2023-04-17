@@ -1,7 +1,20 @@
+package com.example;
+
+import javax.xml.bind.annotation.*;
+
+@XmlRootElement(name = "contact")
+@XmlType(propOrder = { "number", "name"
+})
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Contact implements Comparable<Contact> {
 
+    @XmlElement(name = "numero")
     private String number;
+    @XmlElement(name = "nombre")
     private String name;
+
+    public Contact() {
+    }
 
     public Contact(String number, String name) {
         this.number = number;

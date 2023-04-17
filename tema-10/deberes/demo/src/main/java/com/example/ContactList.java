@@ -1,24 +1,32 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+package com.example;
 
+import java.io.FileWriter;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.annotation.*;
+
+@XmlRootElement(name = "agenda")
+@XmlType(propOrder = { "contacts" })
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ContactList {
 
+    @XmlElementWrapper(name = "agenga")
+    @XmlElement(name = "contacto")
     private Contact[] contacts;
+    @XmlTransient
     private int numberOfElements;
-    private String pathToSave;
 
-    public ContactList(int numberOfElements) {
-        contacts = new Contact[numberOfElements];
+    public ContactList() {
+    }
+
+    public ContactList(int quantity) {
+        contacts = new Contact[quantity];
         this.numberOfElements = 0;
     }
 
     public int getNumberOfElements() {
         return numberOfElements;
-    }
-
-    public void setPathToSave(String pathToSave) {
-        this.pathToSave = pathToSave;
     }
 
     public int isOnList(Contact contact) {
@@ -52,24 +60,19 @@ public class ContactList {
         return null;
     }
 
-    public boolean saveAllContacts() {
-        try (BufferedWriter out = new BufferedWriter(new FileWriter(pathToSave))) {
-            out.write("<agenda>");
-            out.newLine();
-            for (int index = 0; index < numberOfElements; index++) {
-                out.write("\t<contacto>");
-                out.newLine();
-                out.write("\t\t<nombre>" + contacts[index].getName() + "</nombre>");
-                out.newLine();
-                out.write("\t\t<numero>" + contacts[index].getNumber() + "</numero>");
-                out.newLine();
-                out.write("\t</contacto>");
-                out.newLine();
-            }
-            out.write("</agenda>");
+    public static boolean saveAllContacts(ContactList cl, String path) {
+        try {
+            JAXBContext context = JAXBContext.newInstance(ContactList.class);
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            m.marshal(cl, new FileWriter(path));
             return true;
-        } catch (IOException e) {
+        } catch (
+
+        Exception e) {
+            System.out.println(e);
             return false;
         }
     }
+
 }

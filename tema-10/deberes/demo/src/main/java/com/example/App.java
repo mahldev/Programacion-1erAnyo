@@ -1,5 +1,6 @@
 package com.example;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class App {
@@ -7,56 +8,72 @@ public class App {
     private static Scanner sc = new Scanner(System.in);
 
     private static int menu() {
-        String[] menu = {
-                "Registrar nueva temperatura",
-                "Mostrar historial de registro",
+        String[] options = {
+                "Nuevo contacto",
+                "Buscalo por nombre",
+                "Mostrar todos",
                 "Salir"
         };
-        for (int index = 0; index < menu.length; index++) {
-            System.out.println((index + 1) + ". " + menu[index]);
+
+        System.out.println();
+        for (int index = 0; index < options.length; index++) {
+            System.out.println((index + 1) + ". " + options[index]);
         }
-        System.out.print(": ");
+        System.out.print(":");
         return sc.nextInt();
     }
 
-    private static TemperatureLog newTemperatureLog() {
-        String date;
-        int tempMax, tempMin;
-        sc.nextLine();
-        System.out.print("Introduzca los datos correspondiente" +
-                "\nfecha: ");
-        date = sc.nextLine();
-        System.out.print("temperatura maxima: ");
-        tempMax = sc.nextInt();
-        System.out.print("temperatura minima: ");
-        tempMin = sc.nextInt();
-        return new TemperatureLog(date, tempMax, tempMin);
-    }
+    private static Contact newContact() {
+        String name, number;
 
-    private static void showLogs(TemperatureLog[] logs) {
-        for (TemperatureLog temperatureLog : logs) {
-            System.out.println(temperatureLog);
-        }
+        sc.nextLine();
+        System.out.print("\nIntroduzca los datos del contacto\nNombre: ");
+        name = sc.nextLine();
+        System.out.print("Numero: ");
+        number = sc.nextLine();
+        return new Contact(number, name);
     }
 
     public static void main(String[] args) throws Exception {
 
-        WeatherStation ws = new WeatherStation(10);
+        ContactList contactList = new ContactList(20);
+        Contact[] contacts;
+        String pattern;
         int option = 0;
 
-        while (option < 3) {
+        while (option < 4) {
             switch ((option = menu())) {
                 case 1 -> {
-                    System.out.println(ws.addTemperatureLog(newTemperatureLog())
-                            ? "Se ha registrado correctamente"
-                            : "No se ha compleado el registro");
+                    System.out.println(contactList.createNewContact(newContact())
+                            ? "\nSe ha creado correctamente"
+                            : "\nNo se ha podido crear el contacto");
                 }
                 case 2 -> {
-                    if (ws.getNumberOfLogs() > 0)
-                        showLogs(ws.giveAllTemperatureLogs());
+                    contacts = contactList.giveAllContacts();
+                    if (contacts != null) {
+                        System.out.print("\nIntroduzca el nombre o patron a buscar: ");
+                        sc.nextLine();
+                        pattern = sc.nextLine();
+                        for (Contact contact2 : contacts) {
+                            if (contact2.getName().contains(pattern)) {
+                                System.out.println(contact2);
+                            }
+                        }
+                    }
                 }
                 case 3 -> {
-                    WeatherStation.saveLogs(ws, "temperaturas.xml");
+                    contacts = contactList.giveAllContacts();
+                    if (contacts != null) {
+                        Arrays.sort(contacts);
+                        for (Contact contact2 : contacts) {
+                            System.out.println(contact2);
+                        }
+                    }
+                }
+                case 4 -> {
+                    System.out.println(ContactList.saveAllContacts(contactList, "agenda.xml")
+                            ? "\nSe han guardado correctamente los contactos"
+                            : "");
                 }
             }
         }
