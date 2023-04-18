@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.*;
 @XmlType(propOrder = { "number", "name"
 })
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Contact implements Comparable<Contact> {
+public class Contact {
 
     @XmlElement(name = "numero")
     private String number;
@@ -51,22 +51,12 @@ public class Contact implements Comparable<Contact> {
                 return false;
         } else if (!number.equals(other.number))
             return false;
-        if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
-            return false;
         return true;
     }
 
     @Override
     protected Contact clone() {
         return new Contact(this.number, this.name);
-    }
-
-    @Override
-    public int compareTo(Contact o) {
-        return this.name.compareTo(o.name);
     }
 
     @Override

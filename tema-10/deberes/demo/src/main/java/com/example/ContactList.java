@@ -1,9 +1,5 @@
 package com.example;
 
-import java.io.FileWriter;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "agenda")
@@ -39,7 +35,7 @@ public class ContactList {
         return -1;
     }
 
-    public boolean createNewContact(Contact contact) {
+    public boolean addNewContact(Contact contact) {
         if (numberOfElements == contacts.length)
             return false;
         if (isOnList(contact) == -1) {
@@ -59,20 +55,4 @@ public class ContactList {
         }
         return null;
     }
-
-    public static boolean saveAllContacts(ContactList cl, String path) {
-        try {
-            JAXBContext context = JAXBContext.newInstance(ContactList.class);
-            Marshaller m = context.createMarshaller();
-            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            m.marshal(cl, new FileWriter(path));
-            return true;
-        } catch (
-
-        Exception e) {
-            System.out.println(e);
-            return false;
-        }
-    }
-
 }
