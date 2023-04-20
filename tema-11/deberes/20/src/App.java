@@ -66,7 +66,7 @@ public class App {
         int option;
 
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("storage.dat"))) {
-            myCompany = (Company) in.readObject(); 
+            myCompany = (Company) in.readObject();
         } catch (FileNotFoundException e) {
             myCompany = new Company();
         }
@@ -113,12 +113,12 @@ public class App {
                         }
                     }
                 }
-                case 5 -> {
+                default -> {
                     try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("storage.dat"))) {
                         out.writeObject(myCompany);
                     }
                 }
             }
-        } while (option > 0);
+        } while (option > 0 && option <= 4);
     }
 }
