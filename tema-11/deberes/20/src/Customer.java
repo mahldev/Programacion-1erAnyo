@@ -2,24 +2,26 @@ import java.io.Serializable;
 
 public class Customer implements Serializable {
     
-    private static int ids;
+    private static int contadorId;
     static {
-        ids = 1;
+        contadorId = 1;
     }
     private int id;
     private String name;
     private String phNumber;
 
-    public Customer(int id, String name, String phNumber) {
-        this.id = id;
+    public Customer(String name, String phNumber) {
+        this.id = contadorId++;
         this.name = name;
         this.phNumber = phNumber;
     }
+    
+    public static int getContadorId() {
+        return contadorId;
+    }
 
-    public Customer(String name, String phNumber) {
-        this.id = ids++;
-        this.name = name;
-        this.phNumber = phNumber;
+    public static void setContadorId(int id) {
+        Customer.contadorId = id;
     }
 
     public int getId() {
@@ -30,22 +32,24 @@ public class Customer implements Serializable {
         this.id = id;
     }
 
-    public String getNombre() {
+    public String getName() {
         return name;
     }
 
-    public void setNombre(String name) {
+
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getTelefono() {
+
+    public String getPhNumber() {
         return phNumber;
     }
 
-    public void setTelefono(String phNumber) {
+
+    public void setPhNumber(String phNumber) {
         this.phNumber = phNumber;
     }
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -55,13 +59,6 @@ public class Customer implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         Customer other = (Customer) obj;
-        if (id != other.id)
-            return false;
-        if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
-            return false;
         if (phNumber == null) {
             if (other.phNumber != null)
                 return false;
@@ -69,10 +66,13 @@ public class Customer implements Serializable {
             return false;
         return true;
     }
-
+    
     @Override
     protected Customer clone() {
-        return new Customer(this.id, this.name, this.phNumber);
+        Customer c = new Customer(this.name, this.phNumber);
+        c.id = this.id;
+        contadorId--;
+        return c;
     }
 
     @Override

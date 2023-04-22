@@ -25,14 +25,18 @@ public class Company implements Serializable {
         return false;
     }
 
-    public Customer modifyCustomer(Customer c) {
+    public Customer modifyCustomer(String phNumber) {
         int index;
+        Customer c = new Customer(null, phNumber);
+        Customer.setContadorId((Customer.getContadorId()) - 1);
         if ((index = onList(c)) != -1) 
             return customers.get(index);
         return null; 
     }
 
-    public boolean removeCustomer(Customer c) {
+    public boolean removeCustomer(String phNumber) {
+        Customer c = new Customer(null, phNumber);
+        Customer.setContadorId((Customer.getContadorId()) - 1);
         if (onList(c) != -1) {
             return customers.remove(c);
         }

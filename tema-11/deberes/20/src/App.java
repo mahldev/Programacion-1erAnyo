@@ -1,5 +1,4 @@
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -26,21 +25,16 @@ public class App {
         return sc.nextInt();
     }
 
-    private static String[] askCustomerInfo(int aux) {
-        String[] data = new String[3];
+    private static String[] askCustomerInfo() {
+        String[] data = new String[2];
         String[] tmp = {
-                "id: ",
                 "nombre: ",
                 "numero de telefono: "
         };
-        if (aux == 3) {
-            System.out.print(tmp[0]);
-            data[0] = sc.nextLine();
-        }
+        System.out.print(tmp[0]);
+        data[0] = sc.nextLine();
         System.out.print(tmp[1]);
         data[1] = sc.nextLine();
-        System.out.print(tmp[2]);
-        data[2] = sc.nextLine();
         return data;
     }
 
@@ -48,26 +42,23 @@ public class App {
         return new Customer(name, phNumber);
     }
 
-    private static Customer createNewCustomer(int id, String name, String phNumber) {
-        return new Customer(id, name, phNumber);
-    }
-
     private static void changeCustomer(Customer c, String[] data) {
-        c.setId(Integer.parseInt(data[0]));
-        c.setNombre(data[1]);
-        c.setTelefono(data[2]);
+        c.setName(data[0]);
+        c.setPhNumber(data[1]);
     }
 
     public static void main(String[] args) throws Exception {
         Company myCompany;
         Customer[] customers;
         String[] data;
+        String aux;
         Customer c;
         int option;
 
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("storage.dat"))) {
+            Customer.setContadorId(in.readInt());
             myCompany = (Company) in.readObject();
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             myCompany = new Company();
         }
 
@@ -76,20 +67,19 @@ public class App {
                 case 1 -> {
                     System.out.println("\nIntroduzca la informacion del nuevo cliente");
                     sc.nextLine();
-                    data = askCustomerInfo(2);
-                    System.out.println(myCompany.addCustomer(createNewCustomer(data[1], data[2]))
+                    data = askCustomerInfo();
+                    System.out.println(myCompany.addCustomer(createNewCustomer(data[0], data[1]))
                             ? "\nEl cliente se ha creado correctamente"
                             : "\nNo se he podido completar la operacion");
                 }
                 case 2 -> {
-                    System.out.println("\nIntroduzca la informacion del cliente a buscar");
+                    System.out.println("\nIntroduzca el numero de telefono del cliente");
                     sc.nextLine();
-                    data = askCustomerInfo(3);
+                    aux = sc.nextLine();
                     if ((c = myCompany
-                            .modifyCustomer(createNewCustomer(Integer.parseInt(
-                                    data[0]), data[1], data[2]))) != null) {
+                            .modifyCustomer(aux)) != null) {
                         System.out.println("\nIntroduzca la nueva informacion");
-                        data = askCustomerInfo(3);
+                        data = askCustomerInfo();
                         changeCustomer(c, data);
                         System.out.println("\nSe ha cambiado la informacion correctamente");
                     } else {
@@ -97,12 +87,12 @@ public class App {
                     }
                 }
                 case 3 -> {
+                    System.out.println("\nIntroduzca el numero de telefono del cliente a eliminar");
                     sc.nextLine();
-                    data = askCustomerInfo(3);
-                    System.out.println(myCompany.removeCustomer(createNewCustomer(
-                            Integer.parseInt(data[0]), data[1], data[2]))
-                                    ? "\nSe he eliminado correctamente"
-                                    : "\nNo se ha podido realizar el borrado");
+                    aux = sc.nextLine();
+                    System.out.println(myCompany.removeCustomer(aux)
+                            ? "\nSe he eliminado correctamente"
+                            : "\nNo se ha podido realizar el borrado");
                 }
                 case 4 -> {
                     customers = myCompany.giveCustomers();
@@ -115,6 +105,7 @@ public class App {
                 }
                 default -> {
                     try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("storage.dat"))) {
+                        out.writeInt(Customer.getContadorId());
                         out.writeObject(myCompany);
                     }
                 }
