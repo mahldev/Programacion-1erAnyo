@@ -2,7 +2,7 @@ package com.example;
 
 import java.io.Serializable;
 
-public class ListaClientes implements Serializable{
+public class ListaClientes implements Serializable {
 
     private Cliente[] clientes;
     private int numElementos;

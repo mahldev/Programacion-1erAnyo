@@ -59,7 +59,7 @@ public class ListaClientesTest {
 
         @BeforeEach
         public void setUp() {
-            c = new Cliente("name", "123");
+            c = new Cliente("name", "1");
             lc = new ListaClientes(10);
             lc.agregarCliente(c);
         }
