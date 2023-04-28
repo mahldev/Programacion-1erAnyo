@@ -6,12 +6,10 @@ public abstract class Empleado implements Serializable {
 
     private String nombre;
     private int edad;
-    private double salario;
 
-    public Empleado(String nombre, int edad, double salario) {
+    public Empleado(String nombre, int edad) {
         this.nombre = nombre;
         this.edad = edad;
-        this.salario = salario;
     }
 
     public String getNombre() {
@@ -30,16 +28,39 @@ public abstract class Empleado implements Serializable {
         this.edad = edad;
     }
 
-    public double getSalario() {
-        return salario;
-    }
-
-    public void setSalario(double salario) {
-        this.salario = salario;
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+        result = prime * result + edad;
+        return result;
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Empleado other = (Empleado) obj;
+        if (nombre == null) {
+            if (other.nombre != null)
+                return false;
+        } else if (!nombre.equals(other.nombre))
+            return false;
+        if (edad != other.edad)
+            return false;
+        return true;
+    }
+
+    public abstract double getSalario();
+
+    @Override
     public String toString() {
-        return "Nombre: " + nombre + " - Edad: " + edad + " - Salario: " + salario + "€";
+        return "Nombre: " + nombre + " - Edad: " + edad;
     }
 }
