@@ -1,4 +1,14 @@
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Year;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Scanner;
 
 public class App {
@@ -29,21 +39,44 @@ public class App {
         return sc.nextLine();
     }
 
-    public static Socio crearSocio() {
+    public static Socio crearSocio(String apodo) {
         String nombre, fecha;
 
+        System.out.println("\nIntroduzca los datos del nuevo socio");
+        System.out.println("Apodo: ");
         System.out.print("Nombre: ");
         nombre = sc.nextLine();
         System.out.print("Fecha de Ingreso: ");
         fecha = sc.nextLine();
-        return new Socio(nombre, fecha);
+        return new Socio(apodo, nombre, fecha);
+    }
+
+    public static Club cargarClub() {
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("socios.dat"))) {
+            return (Club) in.readObject();
+        } catch (Exception e) {
+            return new Club();
+        }
+    }
+
+    public static boolean guardarClub(Club c) {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("socios.dat"))) {
+            out.writeObject(c);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public static void main(String[] args) throws Exception {
 
-        Club club = new Club();
+        Club club;
+        ArrayList<Socio> socios;
         int opcion;
+        String apodo;
         boolean error;
+
+        club = cargarClub();
 
         do {
             switch ((opcion = menu())) {
@@ -52,7 +85,8 @@ public class App {
                     do {
                         error = false;
                         try {
-                            System.out.println(club.agregar(pideApodo(), crearSocio())
+                            apodo = pideApodo();
+                            System.out.println(club.agregar(apodo, crearSocio(apodo))
                                     ? "\nSe ha insertado correctamente"
                                     : "\nNo se ha completado la operacion");
                         } catch (DateTimeParseException e) {
@@ -67,12 +101,39 @@ public class App {
                             ? "\nSe ha eliminado correctamente"
                             : "\nNo se ha completado la operacion");
                 }
+                case 3 -> {
+                    sc.nextLine();
+                    apodo = pideApodo();
+                    System.out.println(club.agregar(apodo, crearSocio(apodo))
+                            ? "\nSe ha modicado correctamente"
+                            : "\nNo hay ningun socio con ese apodo");
+                }
                 case 4 -> {
-                    for (Socio s : club.listado()) {
-                        System.out.println(s);
-                    }
+                    socios = club.listado();
+                    socios.sort((o1, o2) -> o1.getApodo().compareToIgnoreCase(o2.getApodo()));
+                    socios.forEach(n -> System.out.println(n));
+                }
+                case 5 -> {
+                    socios = club.listado();
+                    socios.sort((o1, o2) -> o1.getFechaIngreso().compareTo(o2.getFechaIngreso()));
+                    socios.forEach(n -> System.out.println(n));
+                }
+                case 6 -> {
+                    System.out.println("Introduzca el año por el que buscar: ");
+                    socios = club.listado();
+                    socios.forEach(s -> {
+                        int anyo = sc.nextInt();
+                        if (s.getFechaIngreso().getYear() < anyo)
+                            System.out.println(s);
+                    });
+                }
+                default -> {
+                    System.out.println(guardarClub(club)
+                            ? "\nSe ha guardado correctamente"
+                            : "\nNo se ha completado la operacion");
                 }
             }
         } while (opcion < 7);
     }
+
 }

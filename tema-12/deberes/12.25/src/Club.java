@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,10 +20,20 @@ public class Club {
     }
 
     public boolean eliminar(String apodo) {
-        return club.remove(apodo) != club.get(apodo);
+        return club.remove(apodo) != null;
     }
 
-    public Socio[] listado() {
-        return club.values().toArray(new Socio[0]);
+    public boolean modificar(String apodo, Socio s) {
+        if (club.containsKey(apodo)) {
+            club.put(apodo, s);
+            return true;
+        }
+        return false;
+    }
+
+    public ArrayList<Socio> listado() {
+        ArrayList<Socio> res = new ArrayList<>();
+        res.addAll(club.values());
+        return res;
     }
 }

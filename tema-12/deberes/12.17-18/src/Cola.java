@@ -15,8 +15,11 @@ public class Cola<T> implements Contenedor<T> {
 
     @Override
     public T extraer() {
-        T res = cola.get(0);
-        cola.remove(0);
+        T res = null;
+        if (!cola.isEmpty()) {
+            cola.get(0);
+            cola.remove(0);
+        }
         return res;
     }
 
