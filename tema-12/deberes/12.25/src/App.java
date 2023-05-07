@@ -2,13 +2,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.Year;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -71,7 +66,7 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         Club club;
-        ArrayList<Socio> socios;
+        List<Socio> socios;
         int opcion;
         String apodo;
         boolean error;
@@ -111,12 +106,12 @@ public class App {
                 case 4 -> {
                     socios = club.listado();
                     socios.sort((o1, o2) -> o1.getApodo().compareToIgnoreCase(o2.getApodo()));
-                    socios.forEach(n -> System.out.println(n));
+                    socios.forEach(System.out::println);
                 }
                 case 5 -> {
                     socios = club.listado();
                     socios.sort((o1, o2) -> o1.getFechaIngreso().compareTo(o2.getFechaIngreso()));
-                    socios.forEach(n -> System.out.println(n));
+                    socios.forEach(System.out::println);
                 }
                 case 6 -> {
                     System.out.println("Introduzca el año por el que buscar: ");
