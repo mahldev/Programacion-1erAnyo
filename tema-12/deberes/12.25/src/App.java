@@ -3,10 +3,13 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.time.format.DateTimeParseException;
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+=======
+>>>>>>> a8c57300431d59b499543afecc892fcac86a6943
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
@@ -109,6 +112,7 @@ public class App {
                             : "\nNo hay ningun socio con ese apodo");
                 }
                 case 4 -> {
+<<<<<<< HEAD
                     club.listado()
                             .sorted((o1, o2) -> o1.getApodo().compareTo(o2.getApodo()))
                             .forEach(System.out::println);
@@ -124,6 +128,21 @@ public class App {
                     System.out.println("Introduzca la fecha de ingreso");
                     club.listado()
                             .filter(s -> s.getFechaIngreso().getYear() == aux)
+=======
+                    club.listado().stream()
+                            .sorted((s1, s2) -> s1.getApodo().compareTo(s2.getApodo()))
+                            .forEach(System.out::println);
+                }
+                case 5 -> {
+                    club.listado().stream()
+                            .sorted((s1, s2) -> s1.getFechaIngreso().compareTo(s2.getFechaIngreso()))
+                            .forEach(System.out::println);
+                }
+                case 6 -> {
+                    System.out.println("Introduzca el año por el que buscar: ");
+                    club.listado().stream()
+                            .filter(s -> s.getFechaIngreso().getYear() < sc.nextInt())
+>>>>>>> a8c57300431d59b499543afecc892fcac86a6943
                             .forEach(System.out::println);
                 }
                 default -> {

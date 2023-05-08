@@ -1,8 +1,8 @@
 public interface Contenedor<T> {
 
-    public boolean agregar(T p);
+    boolean agregar(T p);
 
-    public T extraer();
+    T extraer();
 
-    public T[] listar(T[] t);
+    T[] listar(T[] t);
 }
