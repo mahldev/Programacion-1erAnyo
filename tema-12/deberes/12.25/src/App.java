@@ -3,7 +3,6 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.time.format.DateTimeParseException;
-import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -66,7 +65,6 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         Club club;
-        List<Socio> socios;
         int opcion;
         String apodo;
         boolean error;
@@ -104,23 +102,20 @@ public class App {
                             : "\nNo hay ningun socio con ese apodo");
                 }
                 case 4 -> {
-                    socios = club.listado();
-                    socios.sort((o1, o2) -> o1.getApodo().compareToIgnoreCase(o2.getApodo()));
-                    socios.forEach(System.out::println);
+                    club.listado().stream()
+                            .sorted((s1, s2) -> s1.getApodo().compareTo(s2.getApodo()))
+                            .forEach(System.out::println);
                 }
                 case 5 -> {
-                    socios = club.listado();
-                    socios.sort((o1, o2) -> o1.getFechaIngreso().compareTo(o2.getFechaIngreso()));
-                    socios.forEach(System.out::println);
+                    club.listado().stream()
+                            .sorted((s1, s2) -> s1.getFechaIngreso().compareTo(s2.getFechaIngreso()))
+                            .forEach(System.out::println);
                 }
                 case 6 -> {
                     System.out.println("Introduzca el año por el que buscar: ");
-                    socios = club.listado();
-                    socios.forEach(s -> {
-                        int anyo = sc.nextInt();
-                        if (s.getFechaIngreso().getYear() < anyo)
-                            System.out.println(s);
-                    });
+                    club.listado().stream()
+                            .filter(s -> s.getFechaIngreso().getYear() < sc.nextInt())
+                            .forEach(System.out::println);
                 }
                 default -> {
                     System.out.println(guardarClub(club)

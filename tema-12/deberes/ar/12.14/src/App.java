@@ -23,7 +23,7 @@ public class App {
                 "3. Mostrar estadisticas",
                 "4. Salir")
                 .forEach(System.out::println);
-        return EntradaTeclado.pedirEntero("");
+        return EntradaTeclado.pedirEntero("-> ");
     }
 
     private static Registro crearRegistro() {
