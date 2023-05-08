@@ -3,7 +3,7 @@ import java.util.Map;
 
 public class Tienda {
 
-    Map<String, Producto> almacen;
+    private Map<String, Producto> almacen;
 
     public Tienda() {
         this.almacen = new HashMap<>();
