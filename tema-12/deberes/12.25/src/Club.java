@@ -1,7 +1,6 @@
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 public class Club {
 
@@ -31,9 +30,7 @@ public class Club {
         return false;
     }
 
-    public ArrayList<Socio> listado() {
-        ArrayList<Socio> res = new ArrayList<>();
-        res.addAll(club.values());
-        return res;
+    public Stream<Socio> listado() {
+        return club.values().stream();
     }
 }

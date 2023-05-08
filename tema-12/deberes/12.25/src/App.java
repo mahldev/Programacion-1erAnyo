@@ -2,14 +2,16 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.Year;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class App {
 
@@ -43,7 +45,6 @@ public class App {
         String nombre, fecha;
 
         System.out.println("\nIntroduzca los datos del nuevo socio");
-        System.out.println("Apodo: ");
         System.out.print("Nombre: ");
         nombre = sc.nextLine();
         System.out.print("Fecha de Ingreso: ");
@@ -71,7 +72,6 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         Club club;
-        ArrayList<Socio> socios;
         int opcion;
         String apodo;
         boolean error;
@@ -109,23 +109,22 @@ public class App {
                             : "\nNo hay ningun socio con ese apodo");
                 }
                 case 4 -> {
-                    socios = club.listado();
-                    socios.sort((o1, o2) -> o1.getApodo().compareToIgnoreCase(o2.getApodo()));
-                    socios.forEach(n -> System.out.println(n));
+                    club.listado()
+                            .sorted((o1, o2) -> o1.getApodo().compareTo(o2.getApodo()))
+                            .forEach(System.out::println);
+
                 }
                 case 5 -> {
-                    socios = club.listado();
-                    socios.sort((o1, o2) -> o1.getFechaIngreso().compareTo(o2.getFechaIngreso()));
-                    socios.forEach(n -> System.out.println(n));
+                    club.listado()
+                            .sorted((o1, o2) -> o1.getFechaIngreso().compareTo(o2.getFechaIngreso()))
+                            .forEach(System.out::println);
                 }
                 case 6 -> {
-                    System.out.println("Introduzca el año por el que buscar: ");
-                    socios = club.listado();
-                    socios.forEach(s -> {
-                        int anyo = sc.nextInt();
-                        if (s.getFechaIngreso().getYear() < anyo)
-                            System.out.println(s);
-                    });
+                    var aux = sc.nextInt();
+                    System.out.println("Introduzca la fecha de ingreso");
+                    club.listado()
+                            .filter(s -> s.getFechaIngreso().getYear() == aux)
+                            .forEach(System.out::println);
                 }
                 default -> {
                     System.out.println(guardarClub(club)
