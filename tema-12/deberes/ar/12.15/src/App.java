@@ -9,12 +9,12 @@ public class App {
                 "3. Actualizar stock",
                 "4. Salir")
                 .forEach(System.out::println);
-        return 0;
+        return EntradaTeclado.pedirEntero("");
     }
 
     private static Producto crearProducto() {
-        return new Producto(EntradaTeclado.pedirCadena("Introduzca el codigo: ")
-                            ,EntradaTeclado.pedirEntero("Introduzca el stock del producto: ") );
+        return new Producto(EntradaTeclado.pedirCadena("Introduzca el codigo: "),
+                EntradaTeclado.pedirEntero("Introduzca el stock del producto: "));
     }
 
     public static void main(String[] args) throws Exception {
@@ -27,7 +27,7 @@ public class App {
             switch ((opcion = menu())) {
                 case 1 -> {
                     p = crearProducto();
-                    System.out.println(tienda.alta(p.getCodigo, p)
+                    System.out.println(tienda.alta(p.getCodigo(), p)
                             ? "Se ha agregado correctamente"
                             : "No se ha completado la operacion");
                 }
@@ -37,12 +37,13 @@ public class App {
                             : "No se ha completado la operacion");
                 }
                 case 3 -> {
-                    System.out.println(tienda.actualizarStock(EntradaTeclado.pedirCadena("Introduzca el codigo del producto: "), EntradaTeclado.pedirEntero("Introduzca el nuevo stock: "))
-                    ? "Se ha modificado correctamente"
-                    : "No se ha completado la operacion");
+                    System.out.println(
+                            tienda.actualizarStock(EntradaTeclado.pedirCadena("Introduzca el codigo del producto: "),
+                                    EntradaTeclado.pedirEntero("Introduzca el nuevo stock: "))
+                                            ? "Se ha modificado correctamente"
+                                            : "No se ha completado la operacion");
                 }
             }
         } while (opcion < 3);
     }
-
 }
